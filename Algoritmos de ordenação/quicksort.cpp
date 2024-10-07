@@ -2,51 +2,54 @@
 using namespace std;
 
 
-void get_vec(int vec[], int size){
+void print_vec(int vec[], int size){
     for(int i = 0; i < size; i++){
-        cout << "\nPosição [" << i <<"]: " << vec[i];
+        cout << "\nPosicão [" << i <<"]: " << vec[i];
     }
 }
 
-int check_lengths(int vec[], int size, int pivo, int *len_maior, int *len_menor){
-    *len_maior = 0;
-    *len_menor = 0;
-    for(int i = 1; i < size; i++){
-        if(vec[i] <= pivo){
-            (*len_maior)++;
-        }else{
-            (*len_menor)++;
-        } 
-    }
+void swap(int vec[], int i, int j){
+    int aux = vec[j];
+    vec[j] = vec[i],
+    vec[i] = aux; 
 }
-// perguntar para o PC!!!!!
-void quicksort(int vec[], int size){
-    if(size < 2) return;
-    int *len_maior = new int; 
-    int *len_menor = new int;
-    int pivo = vec[0];
 
-    check_lengths(vec, size, pivo, len_maior, len_menor);
+void line(){
+    cout << "\n==============================\n";
+}
 
-    int maiores[*len_maior];
-    int menores[*len_menor];
-    for(int i = 1; i < *len_menor; i++){
-        if(vec[i] <= pivo) menores[i] = vec[i];
+int partition(int vec[], int start, int end){
+    int pivot = vec[end];
+    int i = (start-1);
+
+    for(int j = start; j < end; j++){
+        if(vec[j] <= pivot){
+            i++;
+            swap(vec, i, j);
+        }
     }
-    for(int i = 1; i < *len_maior; i++){
-        if(vec[i] > pivo) maiores[i] = vec[i];
-    }
+    swap(vec, i+1, end);
 
-    quicksort(menores, *len_menor);  
-    quicksort(maiores, *len_maior);
+    return (i + 1);
+}
+
+
+void quicksort(int vec[], int start, int end){
+    if(start >= end) return;
+
+    int pivot = partition(vec, start, end);
+
+    quicksort(vec, start, pivot -1);
+    quicksort(vec, pivot+ 1, end);
+
 }
 
 int main(){
     int vec[] = {18, 34, 123, 6, 45, 0, 12, 76, 90, 9};
-    get_vec(vec, 10);
+    print_vec(vec, 10);
     cout << "\n==============================\n";
-    quicksort(vec, 10);
-    get_vec(vec, 10);
+    quicksort(vec, 0, 9);
+    print_vec(vec, 10);
 
     return 0;
 }

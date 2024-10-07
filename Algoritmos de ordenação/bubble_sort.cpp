@@ -20,14 +20,19 @@ void swap(int vec[], int i, int j){
 
 void bubble_sort(int vec[], int size){
     if(size == 1) return;
-
+    bool trocou = false;
     for(int i = 0; i < size-1; i++){
         if(vec[i] > vec[i+1]){
             swap(vec, i, (i+1));
+            trocou = true;
         }
     }
 
-    bubble_sort(vec, size-1);
+    if (trocou){
+        bubble_sort(vec, size-1);
+    }else{
+        return;
+    } 
 
 }
 
