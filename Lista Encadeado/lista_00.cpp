@@ -87,6 +87,7 @@ struct No* remover(struct No *lista, int valor)
 {
     struct No *anterior = NULL;
     struct No *atual = lista;
+    // Faz a busca
     while (atual != NULL && atual->dado != valor)
     {
         anterior = atual;
