@@ -10,7 +10,8 @@ struct Node* inicializar(){
     return NULL;
 };
 
-// Perguntar, por que devo fazer retorno, tem como isso ser void e fds?
+// Perguntar, por que devo fazer retorno? 
+// tem como isso ser void e fds?
 Node* insertAtBeginning(Node *list, int value){
     Node* newNode = new Node();
     newNode->data = value;
