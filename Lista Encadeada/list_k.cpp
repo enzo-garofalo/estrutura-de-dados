@@ -1,8 +1,9 @@
-/* Fazer um programa que faz a leitura de duas listas X e Y, ambas com
-N reais (N deve ser lido tb). Efetue a multiplicação dos respectivos
-pares de elementos de X por Y, gerando uma terceira lista Z.
-Imprima as listas X, Y e Z. */
-
+/*
+Fazer um programa que faz a leitura de uma lista X com N inteiros (N
+deve ser lido tb). Multiplique cada elemento de X por um inteiro K
+(K também deverá ser lido). Imprimir a lista lida, o valor da variável K
+e a lista multiplicada por K.
+*/
 #include <iostream>
 using namespace std;
 struct Node{
@@ -29,7 +30,7 @@ void display(Node *list){
     }
     cout << "NULL" << endl;
 }
-//
+
 void set_list(Node *&list, int num_elements){
     for(int i = 0; i < num_elements; i++){
         int value;
@@ -40,52 +41,43 @@ void set_list(Node *&list, int num_elements){
     cout << "======================================\n";
 }
 
-void set_list_z(Node *list_x, Node *list_y, Node *&list_z){
-    Node *temp_x = list_x;
-    Node *temp_y = list_y;
-
-    Node *newNode = new Node();
-    newNode->next = list_z;
+void set_list_k(Node *&list_k, Node *list_x, int k){
     
-    while(temp_x != NULL){
-        int product = (temp_x->data*temp_y->data);
-        list_z = insertAtBeginning(list_z, product);
-        temp_y = temp_y->next;
-        temp_x = temp_x->next;
+    Node *temp = list_x;
+    while(temp != NULL){
+        int product = temp->data*k;
+        list_k = insertAtBeginning(list_k, product);
+        temp = temp->next;
     }
-
 }
 
 int main(){
     Node *list_x = initialize();
-    Node *list_y = initialize();
-    Node *list_z = initialize();
+    Node *list_k = initialize();
 
     int num_elements;
     cout << "Digite o número de elementos na lista: ";
     cin >> num_elements;
     
+    int k;
+    cout << "Digite a constante k: ";
+    cin >> k;
+
     //Inserindo Elementos no começo da lista!
     cout << "======================================\n";
     cout << "\t   Preencha Lista X\n";
     cout << "======================================\n";
     set_list(list_x, num_elements);
-    cout << "\t   Preencha Lista Y\n";
-    cout << "======================================\n";
-    set_list(list_y, num_elements);
+
    
     cout << "Lista X: ";
     display(list_x);
     cout << "======================================\n";
-    cout << "Lista Y: ";
-    display(list_y);
+    // I need to learn how to insert at the end of list!
+    set_list_k(list_k, list_x, k);
+    cout << "Lista K: ";
+    display(list_k);
 
-    set_list_z(list_x, list_y, list_z);
-
-    cout << "======================================\n";
-    cout << "Lista Z: ";
-    display(list_z);
-    cout << "======================================\n";
 
     return 0;
 }
