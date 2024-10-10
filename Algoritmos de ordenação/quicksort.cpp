@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
 
 
 void print_vec(int vec[], int size){

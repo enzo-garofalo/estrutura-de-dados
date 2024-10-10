@@ -15,11 +15,30 @@ Node* initialize(){
     return NULL;
 };
 
-Node* insertAtBeginning(Node *list, int value){
+Node* insertAtEnd(Node *list, int value){
+    // Here we create a new node
     Node *newNode = new Node();
+    // We set the data to the value
     newNode->data = value;
-    newNode->next = list;
-    return newNode;
+    // And point the next element to NULL
+    // It has to be this way, 
+    // cause we want to allocate this node to the last one.
+    newNode->next = NULL;
+
+    // If list is empty, update the list to the new Node!
+    if(list == NULL){
+        return newNode;
+    }
+    
+    Node *temp = list;
+    // Advances list until penultimate node
+    // It has to stop at penultimate node!
+    while(temp->next != NULL) temp = temp->next;
+
+    // So it updates last node to the new value
+    temp->next = newNode;
+
+    return list;
 }
 
 void display(Node *list){
@@ -36,7 +55,7 @@ void set_list(Node *&list, int num_elements){
         int value;
         cout << "Digite o valor para a posicao ["<< (i) <<"]: ";
         cin >> value;
-        list = insertAtBeginning(list, value);   
+        list = insertAtEnd(list, value);   
     }
     cout << "======================================\n";
 }
@@ -46,7 +65,7 @@ void set_list_k(Node *&list_k, Node *list_x, int k){
     Node *temp = list_x;
     while(temp != NULL){
         int product = temp->data*k;
-        list_k = insertAtBeginning(list_k, product);
+        list_k = insertAtEnd(list_k, product);
         temp = temp->next;
     }
 }
@@ -69,7 +88,6 @@ int main(){
     cout << "======================================\n";
     set_list(list_x, num_elements);
 
-   
     cout << "Lista X: ";
     display(list_x);
     cout << "======================================\n";
@@ -77,7 +95,6 @@ int main(){
     set_list_k(list_k, list_x, k);
     cout << "Lista K: ";
     display(list_k);
-
 
     return 0;
 }

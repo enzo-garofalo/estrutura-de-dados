@@ -6,7 +6,7 @@ struct Node{
     Node *next;
 };
 
-struct Node* initialize(){
+Node* initialize(){
     return NULL;
 };
 

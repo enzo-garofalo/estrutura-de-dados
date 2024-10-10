@@ -14,11 +14,18 @@ Node* initialize(){
     return NULL;
 };
 
-Node* insertAtBeginning(Node *list, int value){
+Node* insertAtEnd(Node *list, int value){
     Node *newNode = new Node();
     newNode->data = value;
-    newNode->next = list;
-    return newNode;
+    newNode->next = NULL;
+
+    if(list == NULL) return newNode;
+
+    Node *temp = list;
+    while(temp->next != NULL) temp = temp->next;
+    
+    temp->next = newNode;
+    return list;
 }
 
 void display(Node *list){
@@ -35,7 +42,7 @@ void set_list(Node *&list, int num_elements){
         int value;
         cout << "Digite o valor para a posicao ["<< (i) <<"]: ";
         cin >> value;
-        list = insertAtBeginning(list, value);   
+        list = insertAtEnd(list, value);   
     }
     cout << "======================================\n";
 }
@@ -49,7 +56,7 @@ void set_list_z(Node *list_x, Node *list_y, Node *&list_z){
     
     while(temp_x != NULL){
         int product = (temp_x->data*temp_y->data);
-        list_z = insertAtBeginning(list_z, product);
+        list_z = insertAtEnd(list_z, product);
         temp_y = temp_y->next;
         temp_x = temp_x->next;
     }
