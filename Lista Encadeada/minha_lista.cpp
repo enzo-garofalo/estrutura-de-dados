@@ -94,7 +94,7 @@ void insertAtPosition(Node *list, int value, int position){
 }
 
 int main(){
-    Node *list = initialize();
+    Node *list = NULL;
 
     int num_elementos;
     cout << "Digite o número de elementos na lista: ";

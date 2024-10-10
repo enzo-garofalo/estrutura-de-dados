@@ -1,7 +1,8 @@
 /*
-Fazer um programa que faz a leitura de uma lista X com N reais
-(N deverá ser lido). Calcule o somatório de todos os elementos
-da lista. Imprimir a lista lida e o valor do somatório.
+Fazer um programa que faz a leitura de uma lista X, com N
+inteiros (N deverá ser lido). Gere uma segunda lista com os
+valores de X em ordem inversa. Imprimir X e a lista com a
+ordem inversa.
 */
 #include <iostream>
 using namespace std;
@@ -11,17 +12,11 @@ struct Node{
     Node *next;
 };
 
-
-Node* insertAtEnd(Node *list, int value){
+Node* insertAtBeginning(Node *list, int value){
     Node *newNode = new Node();
     newNode->data = value;
-    newNode->next = NULL;
-
-    if(list == NULL) return newNode;
-    Node *temp = list;
-    while(temp->next != NULL) temp = temp->next;
-    temp->next = newNode;
-    return list;
+    newNode->next = list;
+    return newNode;
 }
 
 void display(Node *list) {
@@ -38,23 +33,14 @@ void set_list(Node *&list, int num_elements) {
         int value;
         cout << "Digite o valor para a posicao [" << (i) << "]: ";
         cin >> value;
-        list = insertAtEnd(list, value);
+        list = insertAtBeginning(list, value);
     }
     cout << "======================================\n";
 }
 
-int get_sum(Node *list){
-    Node *temp = list;
-    int sum = 0;
-    while(temp != NULL){
-        sum += temp->data;
-        temp = temp->next;
-    }
-    return sum;
-}
-
 int main(){
     Node *list_x = NULL;
+    Node *inverse_list = NULL;
 
     int num_elements;
     cout << "Digite o número de elementos na lista: ";
@@ -68,8 +54,14 @@ int main(){
 
     cout << "Lista X: ";
     display(list_x);
-    cout << "======================================\n";
-    cout << "Soma: " << get_sum(list_x);
 
+    Node *temp = list_x;
+    while (temp != NULL){
+        inverse_list = insertAtBeginning(inverse_list, temp->data);
+        temp = temp->next; 
+    }
+    cout << "======================================\n";
+    cout << "Inversa: ";
+    display(inverse_list);
     return 0;
 }
