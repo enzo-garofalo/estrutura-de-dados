@@ -22,7 +22,9 @@ TreeNode* insertNode(TreeNode *node, int value) {
           newNode->data = value;
           newNode->left = NULL;
           newNode->right = NULL;
+          return newNode;
      }
+
 
      if(value < node->data){
           node->left = insertNode(node->left, value);
@@ -46,9 +48,9 @@ void printNode(TreeNode *node, int level){
                strcat(txt, "       ");
           }
 
-          if(level > 0) strcat(txt, "...");
+          if(level > 0) strcat(txt, "|...");
 
-          cout << txt << node->data;
+          cout << txt << node->data << "\n";
 
           printNode(node->left, level+1);
           printNode(node->right, level+1);
